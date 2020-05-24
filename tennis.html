@@ -6,27 +6,45 @@
     let paddleY = 100;
     let ballX = canvas.width/2;
     let ballY = canvas.height/2;
+    let speed = 10;
     
     window.onload = function(){
-        setInterval(drawThings, 1000/30)
+        let frameRate = 30;
+        setInterval(function(){
+            moveThings();
+            // draw the main canvas
+            drawRectangles(0,0,canvas.width,canvas.height, 'black');
+
+            //draw the first paddle
+            drawRectangles(0,((canvas.height/2)-paddleY/2),10,paddleY, 'white');
+
+            //draw the second paddle
+            drawRectangles(canvas.width-10, ((canvas.height/2) - (paddleY/2)), 10, paddleY, 'white');
+
+            drawBall('red', ballX, ballY, 10);
+        }, 1000/frameRate)
     }
 
-    const drawThings = ()=>{
-        //draw the main canvas
-        context.fillStyle = 'black';
-        context.fillRect(0,0,canvas.width,canvas.height)
-
-        //draw the first paddle
-        context.fillStyle = 'white';
-        context.fillRect(0,((canvas.height/2)-(paddleY/2)),10,paddleY);
-
-        //draw the ball
-        ballX+=5;
-        ballY+=5;
-        context.fillStyle = 'lime';
-        context.fillRect(ballX,ballY,10,10);
-
+    const moveThings = () => {
+        ballX = ballX + speed;
+        if (ballX > canvas.width-20) {
+            speed = -speed;
+        }
+        if (ballX < 20) {
+            speed = -speed;
+        }
     }
 
+    const drawRectangles = (x, y, width, height, color) => {
+        context.fillStyle = color;
+        context.fillRect(x, y, width, height)
+    }
+
+    const drawBall = (color, x,y, radius) => {
+        context.fillStyle = color;
+        context.beginPath();
+        context.arc(x,y,radius,0,Math.PI*2,false);
+        context.fill();
+    }
 
 </script>
