@@ -1,12 +1,23 @@
-<canvasid id="snake"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="snake.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Snek</h1>
+    <h2>Press direction keys to start</h2>
+    <canvas id="snake"
 width="400"
 height="400">
 </canvas>
-
+</body>
 <script>
     window.onload=()=>{
-    let canvas = document.getElementById('snake');
-    let context = canvas.getContext('2d');
+    canvas = document.getElementById("snake");
+    context = canvas.getContext("2d");
     document.addEventListener('keydown', pushkey);
     //call game function that runs 15 times every second. 
     setInterval(game,1000/15);
@@ -25,42 +36,45 @@ height="400">
 
     let trail = [];
     let tail = 5;
-    const game = () => {
+    function game(){
         px+=xv;
         py+=yv;
         if (px<0){
-            px=tc-1;
+            px=tile_count-1;
         }
-        if (py>tc-1){
+        if (px>tile_count-1){
             px = 0
         }
         if (py<0) {
-            py=tc-1
+            py=tile_count-1
         }
-        if (py>tc-1){
+        if (py>tile_count-1){
             py=0;
         }
+        context.fillStyle = 'black';
+        context.fillRect(0,0,canvas.width, canvas.height);
 
-    }
-
-    context.fillStyle = 'black';
-    context.fillRect(0,0,canvas.width, canvas.height);
-
-    context.fillStyle = 'lime';
-    for (let i=0;i<trail.length;i++){
-        context.fillRect(trail[i].x*grid_size, trail[i].y*grid_size, grid_size-2,grid_size-2);
-        if(trail[i].x==px && trail[i].y==py){
-            tail =5;
+        context.fillStyle = 'lime';
+        for (let i=0;i<trail.length;i++){
+            context.fillRect(trail[i].x*grid_size, trail[i].y*grid_size, grid_size-2,grid_size-2);
+            if(trail[i].x==px && trail[i].y==py){
+                tail = 5;
+            }
         }
-    }
+        trail.push({x:px, y:py});
+            while(trail.length>tail) {
+                trail.shift();
+            }
 
-    if(seedx==px && seedy==py) {
-        tail++;
-        seedx = Math.floor(Math.random()*tile_count);
-        seedy = Math.floor(Math.random()*tile_count);
-    }
-    context.fillRect(seedx*grid_size, seedy*grid_size,grid_size-2, grid_size-2);
+        if(seedx==px && seedy==py) {
+                tail++;
+                seedx = Math.floor(Math.random()*tile_count);
+                seedy = Math.floor(Math.random()*tile_count);
+            }
+        context.fillStyle='red';
+        context.fillRect(seedx*grid_size, seedy*grid_size,grid_size-2, grid_size-2);
 
+        }
     const pushkey = (event) => {
         switch(event.keyCode) {
             case 37:
@@ -77,4 +91,12 @@ height="400">
                 break;
         }
     }
+    
+
+
+   
 </script>
+</html>
+
+
+
