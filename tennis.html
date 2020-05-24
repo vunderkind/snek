@@ -1,0 +1,32 @@
+<canvas id="tennis" width="800px" height="600px"></canvas>
+
+<script>
+    let canvas = document.getElementById('tennis');
+    let context = canvas.getContext('2d');
+    let paddleY = 100;
+    let ballX = canvas.width/2;
+    let ballY = canvas.height/2;
+    
+    window.onload = function(){
+        setInterval(drawThings, 1000/30)
+    }
+
+    const drawThings = ()=>{
+        //draw the main canvas
+        context.fillStyle = 'black';
+        context.fillRect(0,0,canvas.width,canvas.height)
+
+        //draw the first paddle
+        context.fillStyle = 'white';
+        context.fillRect(0,((canvas.height/2)-(paddleY/2)),10,paddleY);
+
+        //draw the ball
+        ballX+=5;
+        ballY+=5;
+        context.fillStyle = 'lime';
+        context.fillRect(ballX,ballY,10,10);
+
+    }
+
+
+</script>
