@@ -5,29 +5,75 @@ height="400">
 
 <script>
     window.onload=()=>{
-    canvas = document.getElementById('snake');
-    canvas.getContext('2d');
+    let canvas = document.getElementById('snake');
+    let context = canvas.getContext('2d');
     document.addEventListener('keydown', pushkey);
     //call game function that runs 15 times every second. 
     setInterval(game,1000/15);
 }
+    //define x and y velocities
     let xv=yv=0; 
+
+    //define position x and y
+    let px=py=10
+
+    // Setting up the grid and the tiles (20 x 20)
+    let grid_size=tile_count = 20
+
+    // Seed = the thing the snake eats
+    let seedx=seedy=15
+
+    let trail = [];
+    let tail = 5;
     const game = () => {
+        px+=xv;
+        py+=yv;
+        if (px<0){
+            px=tc-1;
+        }
+        if (py>tc-1){
+            px = 0
+        }
+        if (py<0) {
+            py=tc-1
+        }
+        if (py>tc-1){
+            py=0;
+        }
 
     }
+
+    context.fillStyle = 'black';
+    context.fillRect(0,0,canvas.width, canvas.height);
+
+    context.fillStyle = 'lime';
+    for (let i=0;i<trail.length;i++){
+        context.fillRect(trail[i].x*grid_size, trail[i].y*grid_size, grid_size-2,grid_size-2);
+        if(trail[i].x==px && trail[i].y==py){
+            tail =5;
+        }
+    }
+
+    if(seedx==px && seedy==py) {
+        tail++;
+        seedx = Math.floor(Math.random()*tile_count);
+        seedy = Math.floor(Math.random()*tile_count);
+    }
+    context.fillRect(seedx*grid_size, seedy*grid_size,grid_size-2, grid_size-2);
+
     const pushkey = (event) => {
         switch(event.keyCode) {
             case 37:
                 xv=-1;yv=0;
                 break;
             case 38:
-                xv=0;yv=1;
+                xv=0;yv=-1;
                 break;
             case 39:
                 xv=1;yv=0;
                 break;
             case 40:
-                xv=0;yv=-1;
+                xv=0;yv=1;
                 break;
         }
     }
