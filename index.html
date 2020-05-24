@@ -62,10 +62,13 @@ height="400">
             }
         }
         trail.push({x:px, y:py});
+
+        // remove the last trail to prevent eternal trailing
             while(trail.length>tail) {
                 trail.shift();
             }
-
+            
+        //Collision checker
         if(seedx==px && seedy==py) {
                 tail++;
                 seedx = Math.floor(Math.random()*tile_count);
