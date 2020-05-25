@@ -6,7 +6,8 @@
     let paddleY = 100;
     let ballX = canvas.width/2;
     let ballY = canvas.height/2;
-    let speed = 10;
+    let ballSpeedX = 10;
+    let ballSpeedY = 10;
     
     window.onload = function(){
         let frameRate = 30;
@@ -26,7 +27,8 @@
     }
 
     const moveThings = () => {
-        ballX = ballX + speed;
+        ballX = ballX + ballSpeedX;
+        ballY = ballY + ballSpeedY;
         if (ballX > canvas.width-20) {
             speed = -speed;
         }
