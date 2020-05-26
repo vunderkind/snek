@@ -9,6 +9,7 @@
     let ballY = canvas.height/2;
     let ballSpeedX = 10;
     let ballSpeedY = 4;
+    let paddle1X;
     
     window.onload = function(){
         let frameRate = 30;
@@ -18,6 +19,7 @@
             let mousePos = calculateMousePos(e);
             paddle1Y = mousePos.y-(PADDLE_HEIGHT/2)
             console.log(paddle1Y)
+            paddle1X = mousePos.x
         })
 
         setInterval(function(){
@@ -42,8 +44,13 @@
             ballSpeedX = -ballSpeedX
         }
         if (ballX <0) {
-            // 
-            ballReset();
+            if (ballY > paddle1Y && 
+                ballY < paddle1Y+PADDLE_HEIGHT){
+                    ballSpeedX = -ballSpeedX;
+                }
+            else {
+                ballReset();
+            }
         }
         if (ballY > canvas.height-20){
             ballSpeedY = -ballSpeedY
