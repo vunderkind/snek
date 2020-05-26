@@ -42,7 +42,8 @@
             ballSpeedX = -ballSpeedX
         }
         if (ballX <0) {
-            ballSpeedX = -ballSpeedX
+            // 
+            ballReset();
         }
         if (ballY > canvas.height-20){
             ballSpeedY = -ballSpeedY
@@ -75,4 +76,9 @@
         }
     }
 
+    const ballReset = () => {
+        ballSpeedX = -ballSpeedX
+        ballX = canvas.width/2;
+        ballY = canvas.height/2;
+    }
 </script>
