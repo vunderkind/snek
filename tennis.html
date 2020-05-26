@@ -7,7 +7,7 @@
     let ballX = canvas.width/2;
     let ballY = canvas.height/2;
     let ballSpeedX = 10;
-    let ballSpeedY = 10;
+    let ballSpeedY = 4;
     
     window.onload = function(){
         let frameRate = 30;
@@ -30,10 +30,16 @@
         ballX = ballX + ballSpeedX;
         ballY = ballY + ballSpeedY;
         if (ballX > canvas.width-20) {
-            speed = -speed;
+            ballSpeedX = -ballSpeedX
         }
-        if (ballX < 20) {
-            speed = -speed;
+        if (ballX <0) {
+            ballSpeedX = -ballSpeedX
+        }
+        if (ballY > canvas.height-20){
+            ballSpeedY = -ballSpeedY
+        }
+        if (ballY < 0){
+            ballSpeedY = -ballSpeedY
         }
     }
 
