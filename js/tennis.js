@@ -30,6 +30,8 @@
     let player1Score = 0
     let player2Score = 0;
     const WINNING_SCORE = 3;
+
+    let gameOver = false;
     
     
     //core function 
@@ -48,6 +50,12 @@
             moveThings();
             // draw the main canvas
             drawRectangles(0,0,canvas.width,canvas.height, 'black');
+
+            if (gameOver){
+                context.fillStyle = 'lime';
+                context.fillText(`Game over. You scored: ${player1Score}. The AI scored: ${player2Score}`, canvas.width/2, canvas.height/2)
+                return
+            }
 
             //draw the first paddle
             drawRectangles(0,paddle1Y,PADDLE_THICKNESS,PADDLE_HEIGHT, PADDLE_COLOR);
@@ -74,6 +82,9 @@
     
     //function for displacing position 
     const moveThings = () => {
+        if(gameOver){
+            return;
+        }
 
         moveAI();
         ballX = ballX + ballSpeedX;
@@ -144,6 +155,7 @@
         if (player1Score >= WINNING_SCORE || player2Score >= WINNING_SCORE) {
             player2Score = 0;
             player1Score = 0;
+            gameOver = true;
         }
         ballSpeedX = -ballSpeedX
         ballX = canvas.width/2;
