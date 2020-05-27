@@ -1,42 +1,62 @@
-<canvas id="tennis" width="800px" height="600px"></canvas>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TENNIS</title>
+</head>
+<body>
+    <canvas id="tennis" width="800px" height="600px"></canvas>
 
 <script>
+
+    //canvas and canvas context 
     let canvas = document.getElementById('tennis');
     let context = canvas.getContext('2d');
+    
+    //paddles
     let paddle1Y = 250;
-    let PADDLE_HEIGHT = 200;
+    let paddle2Y = 250;
+    let PADDLE_HEIGHT = 100;
+    const PADDLE_THICKNESS = 5;
+    
+    //ball position
     let ballX = canvas.width/2;
     let ballY = canvas.height/2;
+    
+    //ball speed
     let ballSpeedX = 10;
     let ballSpeedY = 4;
-    let paddle1X;
     
+    
+    //core function 
     window.onload = function(){
         let frameRate = 30;
-
+        
+        // Mouse movement moving paddle
         canvas.addEventListener('mousemove', 
         (e)=> {
             let mousePos = calculateMousePos(e);
             paddle1Y = mousePos.y-(PADDLE_HEIGHT/2)
-            console.log(paddle1Y)
-            paddle1X = mousePos.x
         })
 
+        //function that redraws canvas & things at intervals
         setInterval(function(){
             moveThings();
             // draw the main canvas
             drawRectangles(0,0,canvas.width,canvas.height, 'black');
 
             //draw the first paddle
-            drawRectangles(10,paddle1Y,10,PADDLE_HEIGHT, 'lime');
+            drawRectangles(0,paddle1Y,PADDLE_THICKNESS,PADDLE_HEIGHT, 'lime');
 
             //draw the second paddle
-            drawRectangles(780,250, 10, PADDLE_HEIGHT, 'lime');
+            drawRectangles(canvas.width-PADDLE_THICKNESS,paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'lime');
 
             drawBall('red', ballX, ballY, 10);
         }, 1000/frameRate)
     }
     
+    //function for displacing position 
     const moveThings = () => {
         ballX = ballX + ballSpeedX;
         ballY = ballY + ballSpeedY;
@@ -59,12 +79,14 @@
             ballSpeedY = -ballSpeedY
         }
     }
-
+    
+    //function that draws canvas and paddles
     const drawRectangles = (x, y, width, height, color) => {
         context.fillStyle = color;
         context.fillRect(x, y, width, height)
     }
 
+    //function that draws the ball
     const drawBall = (color, x,y, radius) => {
         context.fillStyle = color;
         context.beginPath();
@@ -89,3 +111,6 @@
         ballY = canvas.height/2;
     }
 </script>
+</body>
+</html>
+
