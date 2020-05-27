@@ -26,7 +26,7 @@
     
     //ball speed
     let ballSpeedX = 10;
-    let ballSpeedY = 4;
+    let ballSpeedY = 5;
     
     
     //core function 
@@ -37,7 +37,7 @@
         canvas.addEventListener('mousemove', 
         (e)=> {
             let mousePos = calculateMousePos(e);
-            paddle1Y = mousePos.y-(PADDLE_HEIGHT/2)
+            paddle2Y = mousePos.y-(PADDLE_HEIGHT/2)
         })
 
         //function that redraws canvas & things at intervals
@@ -60,9 +60,9 @@
     const moveThings = () => {
         ballX = ballX + ballSpeedX;
         ballY = ballY + ballSpeedY;
-        if (ballX > canvas.width-20) {
-            ballSpeedX = -ballSpeedX
-        }
+        // if (ballX > canvas.width) {
+        //     ballSpeedX = -ballSpeedX
+        // }
         if (ballX <0) {
             if (ballY > paddle1Y && 
                 ballY < paddle1Y+PADDLE_HEIGHT){
@@ -72,7 +72,17 @@
                 ballReset();
             }
         }
-        if (ballY > canvas.height-20){
+
+        if (ballX > canvas.width){
+            if(ballY > paddle2Y && 
+            ballY < paddle2Y+PADDLE_HEIGHT){
+                ballSpeedX = -ballSpeedX;
+            }
+            else{
+                ballReset();
+            }
+        }
+        if (ballY > canvas.height){
             ballSpeedY = -ballSpeedY
         }
         if (ballY < 0){
