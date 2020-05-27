@@ -27,7 +27,9 @@
             TEXT_COLOR = 'white';
 
     // scores
-    let player1Score = player2Score = 0;
+    let player1Score = 0
+    let player2Score = 0;
+    const WINNING_SCORE = 3;
     
     
     //core function 
@@ -87,8 +89,9 @@
                     ballSpeedY = deltaY *0.3;
                 }
             else {
-                ballReset();
                 player2Score++;
+                ballReset();
+                
             }
         }
 
@@ -100,8 +103,8 @@
                 ballSpeedY = deltaY *0.3;
             }
             else{
-                ballReset();
                 player1Score++;
+                ballReset();
             }
         }
         if (ballY > canvas.height){
@@ -138,6 +141,10 @@
     }
 
     const ballReset = () => {
+        if (player1Score >= WINNING_SCORE || player2Score >= WINNING_SCORE) {
+            player2Score = 0;
+            player1Score = 0;
+        }
         ballSpeedX = -ballSpeedX
         ballX = canvas.width/2;
         ballY = canvas.height/2;
