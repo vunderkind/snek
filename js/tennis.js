@@ -6,6 +6,8 @@
     //canvas dimensions
     canvas.width = 900;
     canvas.height = 600;
+
+    context.font = context.font.replace(/\d+px/, "20px");
     
     //paddles
     let paddle1Y = 250;
@@ -44,19 +46,34 @@
             let mousePos = calculateMousePos(e);
             paddle1Y = mousePos.y-(PADDLE_HEIGHT/2)
         })
-
+        const handleClick = (event) => {
+            if (gameOver){
+                player1Score = 0;
+                player2Score = 0;
+                gameOver = false;
+            }
+        }
         //function that redraws canvas & things at intervals
         setInterval(function(){
+            window.addEventListener('mousedown', handleClick)
             moveThings();
             // draw the main canvas
             drawRectangles(0,0,canvas.width,canvas.height, 'black');
 
             if (gameOver){
                 context.fillStyle = 'lime';
-                context.fillText(`Game over. You scored: ${player1Score}. The AI scored: ${player2Score}`, canvas.width/2, canvas.height/2)
+                if(player1Score>=WINNING_SCORE){
+                    
+                context.fillText(`You won, you delightful beast!`, canvas.width/3, canvas.height/6)
+                context.fillText(` Click to start a new game.`, canvas.width/3, canvas.height-PADDLE_HEIGHT )
+                }
+                else if(player2Score>=WINNING_SCORE){
+                    context.fillText(`You lost to the AI, LMAO.`, canvas.width/2 - 150, 100)
+                    context.fillText(` Click to start a new game.`, canvas.width/2.5, canvas.height-PADDLE_HEIGHT )
+                    }               
                 return
             }
-
+                drawNet();
             //draw the first paddle
             drawRectangles(0,paddle1Y,PADDLE_THICKNESS,PADDLE_HEIGHT, PADDLE_COLOR);
 
@@ -126,6 +143,11 @@
         }
     }
     
+    const drawNet = () => {
+        for(let i=0;i<canvas.height; i+=40){
+            drawRectangles(canvas.width/2-1,i,2,20,'lime');
+        }
+    }
     //function that draws canvas and paddles
     const drawRectangles = (x, y, width, height, color) => {
         context.fillStyle = color;
@@ -153,8 +175,6 @@
 
     const ballReset = () => {
         if (player1Score >= WINNING_SCORE || player2Score >= WINNING_SCORE) {
-            player2Score = 0;
-            player1Score = 0;
             gameOver = true;
         }
         ballSpeedX = -ballSpeedX
