@@ -1,3 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+:root{
+    background: yellow;
+    background-image: url('tennis.jpg');
+    background-size: contain;
+    font-family: 'Spectral';
+    width: 100vw;
+}
+
+h1 {
+    font-size: 3em;
+    margin: 0;
+}
+h1, p{
+    text-align: center;
+    width: 50vw;
+    margin: 0 auto;
+    padding-bottom: 7px;
+}
+
+p{
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 900;
+}
+
+.container {
+    width: 100%;
+    text-align: center;
+}
+
 canvas{
-    font-size: 6em;
+    display: inline;
+    /* border: 10px solid black; */
+    border-radius: 15px;
+}
+
+#noplay {
+    background: black;
+    border-radius: 15px;
+    color: lime;
+    padding: 40px;
+    margin-top: 10vh;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.hidden {
+    display: none;
 }

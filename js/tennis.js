@@ -2,10 +2,11 @@
     //canvas and canvas context 
     let canvas = document.getElementById('tennis');
     let context = canvas.getContext('2d');
+    let warningDiv = document.getElementById('noplay')
 
     //canvas dimensions
-    canvas.width = 900;
-    canvas.height = 600;
+    canvas.width = 800;
+    canvas.height = 500;
 
     context.font = context.font.replace(/\d+px/, "20px");
     
@@ -38,6 +39,13 @@
     
     //core function 
     window.onload = function(){
+        if (window.innerWidth<900){
+            canvas.classList.add('hidden');
+            return
+        }
+        else{
+            warningDiv.classList.add('hidden');
+        }
         let frameRate = 30;
         
         // Mouse movement moving paddle
@@ -53,9 +61,14 @@
                 gameOver = false;
             }
         }
+        
+            
+        
         //function that redraws canvas & things at intervals
         setInterval(function(){
+           
             window.addEventListener('mousedown', handleClick)
+
             moveThings();
             // draw the main canvas
             drawRectangles(0,0,canvas.width,canvas.height, 'black');
@@ -68,7 +81,7 @@
                 context.fillText(` Click to start a new game.`, canvas.width/3, canvas.height-PADDLE_HEIGHT )
                 }
                 else if(player2Score>=WINNING_SCORE){
-                    context.fillText(`You lost to the AI, LMAO.`, canvas.width/2 - 150, 100)
+                    context.fillText(`You lost to Walter, the AI. He mocks you!`, canvas.width/3, canvas.height/6)
                     context.fillText(` Click to start a new game.`, canvas.width/2.5, canvas.height-PADDLE_HEIGHT )
                     }               
                 return
@@ -90,10 +103,10 @@
     const moveAI = () => {
         let center = paddle2Y + (PADDLE_HEIGHT/2);
         if (center<ballY-35) {
-            paddle2Y+=6;
+            paddle2Y+=10;
         }
         else if (center>ballY+35){
-            paddle2Y-=6;
+            paddle2Y-=10;
         }
     }
     
