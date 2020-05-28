@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 :root{
     background: yellow;
-    background-image: url('tennis.jpg');
+    background-image: url('/images/tennis.jpg');
     background-size: contain;
     font-family: 'Spectral';
     width: 100vw;
@@ -61,4 +61,16 @@ canvas{
 
 a {
     color: yellow;
+}
+
+footer {
+    /* position: fixed; */
+    margin-top: 50px;
+    color: black;
+    font-family: 'Roboto Mono';
+    text-align: center;
+}
+
+footer a{
+    color: lime;
 }
