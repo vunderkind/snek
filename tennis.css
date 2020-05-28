@@ -47,3 +47,18 @@ canvas{
 .hidden {
     display: none;
 }
+
+.about{
+    background: black;
+    color: lime;
+    width: 50vw;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20vh;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+a {
+    color: yellow;
+}

@@ -43,7 +43,7 @@
             canvas.classList.add('hidden');
             return
         }
-        else{
+        else if(window.innerWidth>900){
             warningDiv.classList.add('hidden');
         }
         let frameRate = 30;
