@@ -74,7 +74,7 @@
             drawRectangles(0,0,canvas.width,canvas.height, 'black');
 
             if (gameOver){
-                context.fillStyle = 'lime';
+                context.fillStyle = 'white';
                 if(player1Score>=WINNING_SCORE){
                     
                 context.fillText(`You won, you delightful beast!`, canvas.width/3, canvas.height/6)
